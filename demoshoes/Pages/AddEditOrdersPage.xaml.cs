@@ -20,7 +20,7 @@ namespace demoshoes.Pages
     /// </summary>
     public partial class AddEditOrdersPage : Page
     {
-        public AddEditOrdersPage()
+        public AddEditOrdersPage(Order order, User user)
         {
             InitializeComponent();
         }
