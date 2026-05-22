@@ -83,7 +83,7 @@ namespace demoshoes.Pages
 
         private void OrdersButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new OrdersPage());
+            NavigationService.Navigate(new OrdersPage(currentUser));
         }
 
         private void LogOutButton_Click(object sender, RoutedEventArgs e)

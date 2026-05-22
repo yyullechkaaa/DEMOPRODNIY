@@ -20,9 +20,33 @@ namespace demoshoes.Pages
     /// </summary>
     public partial class OrdersPage : Page
     {
-        public OrdersPage()
+        private Entities db = new Entities();
+        private List<Order> orders;
+        private User currentUser;
+        public OrdersPage(User user)
         {
             InitializeComponent();
+            currentUser = user;
+            UserFIO.Text = user?.FIO;
+            LoadOrders();
+        }
+
+        private void LoadOrders()
+        {
+            orders = db.Orders.Include("Address").Include("Status").ToList();
+            UpdateOrders();
+        }
+
+        private void UpdateOrders()
+        {
+            if (orders == null || !orders.Any()) return;
+            var query = orders.AsEnumerable();
+            OrdersListView.ItemsSource = query.ToList();
+        }
+
+        private void LogOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AuthPage());
         }
     }
 }
