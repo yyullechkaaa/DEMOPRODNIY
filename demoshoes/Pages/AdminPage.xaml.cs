@@ -30,12 +30,17 @@ namespace demoshoes.Pages
             currentUser = user;
             UserFIO.Text = user?.FIO;
 
+            //Для фильтрации по поставщику
             var supplierscombo = db.Suppliers.ToList();
             supplierscombo.Insert(0, new Supplier { SupplierID = 0, SupplierName = "Все поставщики" });
             SupplierFilter.ItemsSource = supplierscombo;
             SupplierFilter.DisplayMemberPath = "SupplierName";
             SupplierFilter.SelectedValuePath = "SupplierID";
             SupplierFilter.SelectedIndex = 0;
+
+            //Для фильтрации по диапазонам скидки
+            FilterDiscountBox.Items.Insert(0, "Все диапазоны");
+            FilterDiscountBox.SelectedIndex = 0;
 
             LoadShoesProducts();
         }
@@ -61,14 +66,28 @@ namespace demoshoes.Pages
                 });
             }
 
-            //Фильтрация
+            //Фильтрация по поставщику
             if (SupplierFilter.SelectedIndex > 0) { 
             int selectedid = (int)SupplierFilter.SelectedValue;
             query= query.Where(x => x.SupplierID == selectedid);
             }
 
-            //Сортировка
-            if(SortBox.SelectedIndex == 0)
+            //Фильтрация по размеру скидки
+            switch (FilterDiscountBox.SelectedIndex)
+            {
+                case 1: // от 0 до 10,99%
+                    query = query.Where(x => x.Discount >= 0 && x.Discount <= 10.99);
+                    break;
+                case 2: // от 11 до 14,99%
+                    query = query.Where(x => x.Discount >= 11 && x.Discount <= 14.99);
+                    break;
+                case 3: // от 15% и более
+                    query = query.Where(x => x.Discount >= 15);
+                    break;
+            }
+
+            //Сортировка только по количеству
+            if (SortBox.SelectedIndex == 0)
             {
                 query = query.OrderBy(x => x.CountStore);
 
@@ -77,6 +96,25 @@ namespace demoshoes.Pages
             {
                 query = query.OrderByDescending(x => x.CountStore);
             }
+
+            //Сортировка и по цене и по количеству
+            switch (SortTwoBox.SelectedIndex)
+            {
+                case 0: // По возрастанию цены
+                    query = query.OrderBy(x => x.Price);
+                    break;
+                case 1: // По убыванию цены
+                    query = query.OrderByDescending(x => x.Price);
+                    break;
+                case 2: // По возрастанию количества на складе
+                    query = query.OrderBy(x => x.CountStore);
+                    break;
+                case 3: // По убыванию количества на складе
+                    query = query.OrderByDescending(x => x.CountStore);
+                    break;
+            }
+
+
             ShoesProductListView.ItemsSource = query.ToList();
         }
 
@@ -128,6 +166,16 @@ namespace demoshoes.Pages
                 db.SaveChanges();
                 LoadShoesProducts();
             }
+        }
+
+        private void SortTwoBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateShoesProducts();
+        }
+
+        private void FilterDiscountBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateShoesProducts();
         }
     }
 }

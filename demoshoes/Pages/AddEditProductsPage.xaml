@@ -9,6 +9,35 @@
       Title="AddEditProductsPage">
 
     <Grid>
-        
+        <ScrollViewer VerticalScrollBarVisibility="Visible">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                <TextBlock Text="Фото" Style="{StaticResource TextStyle}"/>
+                <Image x:Name="PhotoProduct" Width="200" Height="200"/>
+                <Button Content="Выбрать фото" x:Name="SelectPhoto" Click="SelectPhoto_Click" Style="{StaticResource ButtonStyle}" Width="120"/>
+                <TextBlock Text="Артикул:" Style="{StaticResource TextStyle}"/>
+                <TextBox x:Name="ArticleBox" Style="{StaticResource TextBoxStyle}" Width="200"/>
+                <TextBlock Text="Наименование продукции:" Style="{StaticResource TextStyle}"/>
+                <TextBox x:Name="NameBox" Style="{StaticResource TextBoxStyle}" Width="200"/>
+                <TextBlock Text="Единица измерения:" Style="{StaticResource TextStyle}"/>
+                <ComboBox x:Name="UnitCombo" Style="{StaticResource ComboStyle}" Width="200" DisplayMemberPath="UnitName" SelectedValuePath="UnitID"/>
+                <TextBlock Text="Цена:" Style="{StaticResource TextStyle}"/>
+                <TextBox x:Name="PriceBox" Style="{StaticResource TextBoxStyle}" Width="200"/>
+                <TextBlock Text="Поставщмк:" Style="{StaticResource TextStyle}"/>
+                <ComboBox x:Name="SupplierCombo" Style="{StaticResource ComboStyle}" Width="200" DisplayMemberPath="SupplierName" SelectedValuePath="SupplierID"/>
+                <TextBlock Text="Производитель:" Style="{StaticResource TextStyle}"/>
+                <ComboBox x:Name="ManufactBox" Style="{StaticResource ComboStyle}" Width="200" DisplayMemberPath="ManufacturerName" SelectedValuePath="ManufacturerID"/>
+                <TextBlock Text="Категория:" Style="{StaticResource TextStyle}"/>
+                <ComboBox x:Name="CategoryBox" Style="{StaticResource ComboStyle}" Width="200" DisplayMemberPath="CategoryName" SelectedValuePath="CategoryID"/>
+                <TextBlock Text="Скидка:" Style="{StaticResource TextStyle}"/>
+                <TextBox x:Name="DiscountBox" Style="{StaticResource TextBoxStyle}" Width="200"/>
+                <TextBlock Text="Количество на складе:" Style="{StaticResource TextStyle}"/>
+                <TextBox x:Name="CountBox" Style="{StaticResource TextBoxStyle}" Width="200"/>
+                <TextBlock Text="Описание:" Style="{StaticResource TextStyle}"/>
+                <TextBox x:Name="DescriptionBox" Style="{StaticResource TextBoxStyle}" Width="200"/>
+
+                <Button x:Name="SaveButton" Style="{StaticResource ButtonStyle}" Width="200" Click="SaveButton_Click" Content="Сохранить"/>
+                <Button x:Name="CancelButton" Style="{StaticResource ButtonStyle}" Width="200" Click="CancelButton_Click" Content="Отмена"/>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

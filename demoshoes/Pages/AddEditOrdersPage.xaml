@@ -9,6 +9,27 @@
       Title="AddEditOrdersPage">
 
     <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Visible">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                <TextBlock Text="Артикул заказа" Style="{StaticResource TextStyle}"/>
+                <TextBox x:Name="ArticleOrderBox" Style="{StaticResource TextBoxStyle}" Width="200"/>
+                <TextBlock Text="Дата заказа" Style="{StaticResource TextStyle}"/>
+                <DatePicker x:Name="DateOrderBox" Width="200"/>
+                <TextBlock Text="Дата доставки" Style="{StaticResource TextStyle}"/>
+                <DatePicker x:Name="DateDeliveryBox" Width="200"/>
+                <TextBlock Text="Адрес доставки" Style="{StaticResource TextStyle}"/>
+                <ComboBox x:Name="AddressCombo" Width="200" DisplayMemberPath="AddressName" SelectedValuePath="AddressID" Style="{StaticResource ComboStyle}"/>
+                <TextBlock Text="Клиент" Style="{StaticResource TextStyle}"/>
+                <ComboBox x:Name="UserCombo" Width="200" DisplayMemberPath="FIO" SelectedValuePath="UserID" Style="{StaticResource ComboStyle}"/>
+                <TextBlock Text="Код заказа" Style="{StaticResource TextStyle}"/>
+                <TextBox x:Name="CodeBox" Style="{StaticResource TextBoxStyle}" Width="200"/>
+                <TextBlock Text="Статус" Style="{StaticResource TextStyle}"/>
+                <ComboBox x:Name="StatusCombo" Width="200" DisplayMemberPath="StatusName" SelectedValuePath="StatusID" Style="{StaticResource ComboStyle}"/>
+
+                <Button x:Name="SaveButton" Style="{StaticResource ButtonStyle}" Width="200" Click="SaveButton_Click" Content="Сохранить"/>
+                <Button x:Name="CancelButton" Style="{StaticResource ButtonStyle}" Width="200" Click="CancelButton_Click" Content="Отмена"/>
+            </StackPanel>
+        </ScrollViewer>
         
     </Grid>
 </Page>

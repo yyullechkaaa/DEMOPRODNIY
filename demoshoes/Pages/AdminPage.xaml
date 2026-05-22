@@ -28,9 +28,23 @@
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5" HorizontalAlignment="Center">
             <TextBox x:Name="SearchBox" Style="{StaticResource TextBoxStyle}" Width="200" TextChanged="SearchBox_TextChanged" Margin="5"/>
             <ComboBox x:Name="SupplierFilter" Width="150" Style="{StaticResource ComboStyle}" DisplayMemberPath="SupplierName" Margin="5" SelectionChanged="SupplierFilter_SelectionChanged"/>
+            <!--Сортировка только по количеству на складе по возрастанию и убыванию-->
             <ComboBox x:Name="SortBox" Width="150" Style="{StaticResource ComboStyle}" SelectionChanged="SortBox_SelectionChanged" Margin="5">
                 <ComboBoxItem Content="По возрастанию"/>
                 <ComboBoxItem Content="По убыванию"/>
+            </ComboBox>
+            <!--Сортировка по возрастанию и убыванию И ПО ЦЕНЕ И ПО КОЛИЧЕСТВУ НА СКЛАДЕ-->
+            <ComboBox x:Name="SortTwoBox" Width="200" Style="{StaticResource ComboStyle}" SelectionChanged="SortTwoBox_SelectionChanged" Margin="5">
+                <ComboBoxItem Content="По возрастанию цены"/>
+                <ComboBoxItem Content="По убыванию цены"/>
+                <ComboBoxItem Content="По возрастанию количества на складе"/>
+                <ComboBoxItem Content="По убыванию количества на складе"/>
+            </ComboBox>
+            <!--Фильтрация по размерам скидки-->
+            <ComboBox x:Name="FilterDiscountBox" Width="200" Style="{StaticResource ComboStyle}" SelectionChanged="FilterDiscountBox_SelectionChanged" Margin="5">
+                <ComboBoxItem Content="от 0 до 10,99%"/>
+                <ComboBoxItem Content="от 11 до 14,99%"/>
+                <ComboBoxItem Content="от 15% и более"/>
             </ComboBox>
         </StackPanel>
 
@@ -56,8 +70,8 @@
                                     </TextBlock.Text>
                                 </TextBlock>
                                 <TextBlock Style="{StaticResource TextStyle}"> Описание: <Run Text="{Binding Description}"/> </TextBlock>
-                                <TextBlock Style="{StaticResource TextStyle}"> Производитель: <Run Text="{Binding Manufacturers.ManufacturerName}"/> </TextBlock>
-                                <TextBlock Style="{StaticResource TextStyle}"> Поставщик: <Run Text="{Binding Suppliers.SupplierName}"/> </TextBlock>
+                                <TextBlock Style="{StaticResource TextStyle}"> Производитель: <Run Text="{Binding Manufacturer.ManufacturerName}"/> </TextBlock>
+                                <TextBlock Style="{StaticResource TextStyle}"> Поставщик: <Run Text="{Binding Supplier.SupplierName}"/> </TextBlock>
                                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                     <TextBlock Style="{StaticResource TextStyle}" VerticalAlignment="Center">Цена:</TextBlock>
                                     <TextBlock Text="{Binding OldPriceText}" 
